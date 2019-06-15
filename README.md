@@ -1,2 +1,3 @@
 # codeBuffalo
-Repository for Code: Buffalo Hakathon.
+
+#### Repository for Code: Buffalo Hakathon.
