@@ -18,8 +18,8 @@ algo = KNNWithMeans(k=2, sim_options={
                     'name': 'pearson_baseline', 'user_based': False})
 algo.fit(trainset)
 # we can now query for specific predicions
-uid = "500"  # raw user id
-iid = "adventure"  # raw item id
+uid = "3"  # raw user id
+iid = "big5_openness"  # raw item id
 # get a prediction for specific users and items.
 pred = algo.predict(uid, iid, r_ui=1, verbose=True)
 # run the trained model against the testset
