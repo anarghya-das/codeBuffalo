@@ -33,7 +33,6 @@ def run_model(personality):
 
     new = pd.DataFrame(user_to_dfrows(len(df.index), personality))
     df = df.append(new)
-    import pdb;pdb.set_trace()
     data = Dataset.load_from_df(df[['user', 'trait', 'percentile']], reader=reader)
 
     # pdb.set_trace()

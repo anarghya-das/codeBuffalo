@@ -1,5 +1,6 @@
 from get_personality import *
 from recommender import run_model
+from bored import get_activity
 
 text = input("How do you feel today? (100 words or more): ")
 
@@ -20,4 +21,7 @@ if not personality:
 personality = process_personality(personality.result)
 
 predicted_categories = run_model(personality)
-print(predicted_categories)
+
+activities = get_activity([category[1] for category in predicted_categories])
+
+print(activities)
