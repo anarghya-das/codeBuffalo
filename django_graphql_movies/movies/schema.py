@@ -1,4 +1,5 @@
 import graphene
+import requests
 from graphene_django.types import DjangoObjectType, ObjectType
 from .models import Users
 
@@ -9,6 +10,9 @@ class UserType(DjangoObjectType):
     class Meta:
         model = Users
 
+
+class Text(graphene.ObjectType):
+    text = graphene.String()
 # Create a Query type
 
 
@@ -36,6 +40,19 @@ class userInput(graphene.InputObjectType):
     name = graphene.String()
 
 # Create mutations for users
+
+
+class SendText(graphene.Mutation):
+    text = graphene.String()
+
+    class Arguments:
+        text = graphene.String()
+
+    @staticmethod
+    def mutate(root, info, text):
+        r = requests.get(f'http://www.boredapi.com/api/activity?type={text}')
+        print(r.text)
+        return SendText(text=r.text)
 
 
 class Createuser(graphene.Mutation):
@@ -76,6 +93,7 @@ class Updateuser(graphene.Mutation):
 class Mutation(graphene.ObjectType):
     create_user = Createuser.Field()
     update_user = Updateuser.Field()
+    send_text = SendText.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
