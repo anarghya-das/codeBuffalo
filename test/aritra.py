@@ -12,7 +12,6 @@ with open("output.csv") as file:
         if _id not in anarghya:
             anarghya[_id] = {}
         anarghya[_id][row[1]] = float(row[2])
-    print(anarghya)
     for user in anarghya:
         u = {}
         u["model"] = "movies.users"

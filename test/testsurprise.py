@@ -1,36 +1,43 @@
+import pdb
 import os
 from surprise import accuracy
 from surprise.model_selection import train_test_split
 from surprise import Dataset
 from surprise import Reader
-from surprise.prediction_algorithms import *
+from surprise.prediction_algorithms import SVD
 import pandas as pd
+from convert_pandas import json_to_pandas
+
 # path to dataset file
-file_path = os.path.expanduser('output.csv')
-
+import pdb
+pdb.set_trace()
 reader = Reader(sep=',', skip_lines=0, rating_scale=(0.0, 1.0))
-
-data = Dataset.load_from_file(file_path, reader=reader)
-
-trainset, testset = train_test_split(data, test_size=.05)
+df = pd.DataFrame(json_to_pandas())
+data = Dataset.load_from_df(df[['user', 'trait', 'percentile']], reader=reader)
+# pdb.set_trace()
+trainset = data.build_full_trainset()
+print(trainset)
 # Use user_based true/false to switch between user-based or item-based collaborative filtering
-algo = KNNWithMeans(k=2, sim_options={
-                    'name': 'pearson_baseline', 'user_based': False})
+# algo = KNNWithMeans(k=40, sim_options={
+# 'name': 'pearson_baseline', 'user_based': False})
+algo = SVD()
+# algo.fit(trainset)
 algo.fit(trainset)
-# we can now query for specific predicions
-uid = "3"  # raw user id
-iid = "big5_openness"  # raw item id
-# get a prediction for specific users and items.
-pred = algo.predict(uid, iid, r_ui=1, verbose=True)
+print(algo)
+# exit(1)
+testset = trainset.build_anti_testset()
+predictions = algo.test(testset)
+
+print(predictions)
 # run the trained model against the testset
-test_pred = algo.test(testset)
+#test_pred = algo.test(testset)
 # get RMSE
-print("User-based Model : Test Set")
-accuracy.rmse(test_pred, verbose=True)
+#print("User-based Model : Test Set")
+#accuracy.rmse(test_pred, verbose=True)
 # if you wanted to evaluate on the trainset
-print("User-based Model : Training Set")
-train_pred = algo.test(trainset.build_testset())
-accuracy.rmse(train_pred)
+#print("User-based Model : Training Set")
+#train_pred = algo.test(trainset.build_testset())
+# accuracy.rmse(train_pred)
 
 '''
 benchmark = []
