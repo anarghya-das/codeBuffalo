@@ -66,14 +66,21 @@ while True:
         #Get search results
 
         searchResults = spotifyObject.search(searchQuery,1,0,"artist")
+        try:
+            other=searchResults['artists']['items'][0]['genres']
+            json1=json.dumps(searchResults['artists']['items'][0]['genres'],sort_keys=True, indent=4)
+            # print(json1)
+            rec1(searchResults['artists']['items'][0],other[-2])
 
-        other=searchResults['artists']['items'][0]['genres']
+            cat()
+            print("categories :\n\n",json.dumps(categories,sort_keys=True, indent=4))
+            print()
+            print("dict:\n\n",json.dumps(D,sort_keys=True, indent=4))
+        except IndexError:
+            print("retry")
 
-        json1=json.dumps(searchResults['artists']['items'][0]['genres'],sort_keys=True, indent=4)
-        # print(json1)
-        rec1(searchResults['artists']['items'][0],other[-2])
-        print("Dict: ->>>>>> :",json.dumps(D,sort_keys=True, indent=4))
-        cat()
+
+
 
 
     if choice == "1":
