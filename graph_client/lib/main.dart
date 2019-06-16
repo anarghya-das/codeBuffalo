@@ -36,7 +36,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   TeddyController _teddyController;
-  String _name = "", _twitterName = "";
+  String _name = "";
 
   @override
   initState() {
@@ -77,7 +77,7 @@ class _HomeState extends State<Home> {
           Positioned.fill(
             child: SingleChildScrollView(
                 padding: EdgeInsets.only(
-                    left: 20.0, right: 20.0, top: devicePadding.top - 35),
+                    left: 20.0, right: 20.0, top: devicePadding.top + 50),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -106,8 +106,8 @@ class _HomeState extends State<Home> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 TrackingTextInput(
-                                    label: "Name",
-                                    hint: "What's your name?",
+                                    label: "Twitter Username",
+                                    hint: "What's your username?",
                                     onTextChanged: (String value) {
                                       _name = value;
                                       debugPrint(_name);
@@ -115,20 +115,6 @@ class _HomeState extends State<Home> {
                                     onCaretMoved: (Offset caret) {
                                       _teddyController.lookAt(caret);
                                     }),
-                                TrackingTextInput(
-                                  label: "Twitter ID",
-                                  hint: "Enter your Twitter username without @",
-                                  isObscured: true,
-                                  onCaretMoved: (Offset caret) {
-                                    _teddyController.coverEyes(caret != null);
-                                    _teddyController.lookAt(null);
-                                  },
-                                  onTextChanged: (String value) {
-                                    _twitterName = value;
-                                    debugPrint(_twitterName);
-                                    _teddyController.setPassword(value);
-                                  },
-                                ),
                                 SigninButton(
                                     child: Text("Start",
                                         style: TextStyle(
@@ -136,8 +122,7 @@ class _HomeState extends State<Home> {
                                             fontSize: 18,
                                             color: Colors.white)),
                                     onPressed: () {
-                                      if (_twitterName.isEmpty ||
-                                          _name.isEmpty) {
+                                      if (_name.isEmpty) {
                                         _showSnack();
                                       } else {
                                         Navigator.push(
@@ -145,7 +130,8 @@ class _HomeState extends State<Home> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     Activities(
-                                                        _name, _twitterName)));
+                                                      _name,
+                                                    )));
                                       }
                                       // _teddyController.submitPassword();
                                     })

@@ -12,13 +12,6 @@ class UserType(DjangoObjectType):
         model = Users
 
 
-class Activities(graphene.ObjectType):
-    activity1 = graphene.String()
-    activity2 = graphene.String()
-    activity3 = graphene.String()
-# Create a Query type
-
-
 class Query(ObjectType):
     user = graphene.Field(UserType, id=graphene.Int())
     users = graphene.List(UserType)
@@ -46,22 +39,34 @@ class userInput(graphene.InputObjectType):
 
 
 class ShowActivities(graphene.Mutation):
-    text = graphene.String()
+    activities = graphene.String()
 
     class Arguments:
-        text = graphene.String()
+        activities = graphene.String()
 
     @staticmethod
-    def mutate(root, info, text):
-        tweets = get_tweets(text)
-        activities = get_activities(tweets)
+    def mutate(root, info, activities):
         retString = ""
-        for i in range(len(activities)):
-            if i == 2:
-                retString += activities[i]+"."
-            else:
-                retString += activities[i]+"|"
-        return ShowActivities(text=retString)
+        try:
+            print(activities)
+            tweets = get_tweets(activities)
+            activities = get_activities(tweets)
+            for i in range(len(activities)):
+                if i == 2:
+                    retString += activities[i]+"."
+                else:
+                    retString += activities[i]+"|"
+        except:
+            activities = "Dance around "*50
+            print(activities)
+            tweets = get_tweets(activities)
+            activities = get_activities(tweets)
+            for i in range(len(activities)):
+                if i == 2:
+                    retString += activities[i]+"."
+                else:
+                    retString += activities[i]+"|"
+        return ShowActivities(activities=retString)
 
 
 class Createuser(graphene.Mutation):
@@ -102,7 +107,7 @@ class Updateuser(graphene.Mutation):
 class Mutation(graphene.ObjectType):
     create_user = Createuser.Field()
     update_user = Updateuser.Field()
-    send_text = ShowActivities.Field()
+    show_activities = ShowActivities.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
