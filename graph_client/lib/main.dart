@@ -1,5 +1,6 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
+import 'package:graph_client/Activities.dart';
 import 'teddy_controller.dart';
 import 'package:flutter/rendering.dart';
 import 'tracking_text_input.dart';
@@ -14,17 +15,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
-          primarySwatch: Colors.blue,
-        ),
+            // This is the theme of your application.
+            //
+            // Try running your application with "flutter run". You'll see the
+            // application has a blue toolbar. Then, without quitting the app, try
+            // changing the primarySwatch below to Colors.green and then invoke
+            // "hot reload" (press "r" in the console where you ran "flutter run",
+            // or simply save your changes to "hot reload" in a Flutter IDE).
+            // Notice that the counter didn't reset back to zero; the application
+            // is not restarted.
+            primarySwatch: Colors.green),
         home: Home());
   }
 }
@@ -36,6 +36,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   TeddyController _teddyController;
+  String _name = "", _twitterName = "";
 
   @override
   initState() {
@@ -50,7 +51,7 @@ class _HomeState extends State<Home> {
         title: Text("Graph Client"),
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Color.fromRGBO(93, 142, 155,1.0),
+        backgroundColor: Color.fromRGBO(93, 142, 155, 1.0),
       ),
       backgroundColor: Color.fromRGBO(93, 142, 155, 1.0),
       body: Container(
@@ -76,7 +77,7 @@ class _HomeState extends State<Home> {
           Positioned.fill(
             child: SingleChildScrollView(
                 padding: EdgeInsets.only(
-                    left: 20.0, right: 20.0, top: devicePadding.top + 50.0),
+                    left: 20.0, right: 20.0, top: devicePadding.top - 35),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -105,31 +106,48 @@ class _HomeState extends State<Home> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 TrackingTextInput(
-                                    label: "Email",
-                                    hint: "What's your email address?",
+                                    label: "Name",
+                                    hint: "What's your name?",
+                                    onTextChanged: (String value) {
+                                      _name = value;
+                                      debugPrint(_name);
+                                    },
                                     onCaretMoved: (Offset caret) {
                                       _teddyController.lookAt(caret);
                                     }),
                                 TrackingTextInput(
-                                  label: "Password",
-                                  hint: "Try 'bears'...",
+                                  label: "Twitter ID",
+                                  hint: "Enter your Twitter username without @",
                                   isObscured: true,
                                   onCaretMoved: (Offset caret) {
                                     _teddyController.coverEyes(caret != null);
                                     _teddyController.lookAt(null);
                                   },
                                   onTextChanged: (String value) {
+                                    _twitterName = value;
+                                    debugPrint(_twitterName);
                                     _teddyController.setPassword(value);
                                   },
                                 ),
                                 SigninButton(
-                                    child: Text("Sign In",
+                                    child: Text("Start",
                                         style: TextStyle(
                                             fontFamily: "RobotoMedium",
-                                            fontSize: 16,
+                                            fontSize: 18,
                                             color: Colors.white)),
                                     onPressed: () {
-                                      _teddyController.submitPassword();
+                                      if (_twitterName.isEmpty ||
+                                          _name.isEmpty) {
+                                        _showSnack();
+                                      } else {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Activities(
+                                                        _name, _twitterName)));
+                                      }
+                                      // _teddyController.submitPassword();
                                     })
                               ],
                             )),
@@ -139,5 +157,11 @@ class _HomeState extends State<Home> {
         ],
       )),
     );
+  }
+
+  void _showSnack() {
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text("Please enter your details properly! :("),
+    ));
   }
 }
