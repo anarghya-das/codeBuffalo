@@ -25,7 +25,7 @@ with open("output.json", "w") as file:
 
 
 listOfTraits = {}
-
+list_of_music_genre = {}
 
 def json_file_to_dict(input_file):
     with open(input_file, "r") as inputFile:
@@ -43,9 +43,19 @@ def json_file_to_dict(input_file):
         listOfTraits[i['trait_id']] = i['percentile']
 
 
-json_file_to_dict('output.json')
+def music_genre_score(input_file):
+    with open(input_file, "r") as inputFile:
+        data = json.load(inputFile)
+
+    for i in data['consumption_preferences']:
+        if i['consumption_preference_category_id'] == "consumption_preferences_music":
+            for j in i['consumption_preferences']:
+                list_of_music_genre[j["consumption_preference_id"][29:]] = j['score']
 
 
-print(listOfTraits)
+music_genre_score("output.json")
+
+print(list_of_music_genre)
+
 
 
