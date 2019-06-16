@@ -37,19 +37,24 @@ def get_tweets(username):
     # print(tmp)
 
 
-    d = {}
-    profiles = []
+    # d = {}
+    # profiles = []
+    return_text = ""
     for i in tmp:
-        tweets = {}
-        tweets["content"] = i
-        tweets["contenttype"] = "text/plain"
-        tweets["language"] = "en"
-        profiles.append(tweets)
+        return_text = return_text + i
+    #     tweets = {}
+    #     tweets["content"] = i
+    #     tweets["contenttype"] = "text/plain"
+    #     tweets["language"] = "en"
+    #     profiles.append(tweets)
+    #
+    # d["contentItems"] = profiles
+    # with open('twitter.json', 'w') as secret_info:
+    #     json.dump(d, secret_info, indent=4, sort_keys=True)
+    # # json.dumps(d)
 
-    d["contentItems"] = profiles
-    with open('twitter.json', 'w') as secret_info:
-        json.dump(d, secret_info, indent=4, sort_keys=True)
-    # json.dumps(d)
+    text_file = open("profile_txt.txt", "a")
+    text_file.write(return_text)
 
 
 # Driver code 
