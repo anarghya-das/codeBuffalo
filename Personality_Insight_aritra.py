@@ -8,7 +8,7 @@ personality_insights = PersonalityInsightsV3(
     url='https://gateway-wdc.watsonplatform.net/personality-insights/api'
 )
 
-with open(join(dirname(__file__), './profilesSmall.json')) as profile_json:
+with open(join(dirname(__file__), './twitter.json')) as profile_json:
     profile = personality_insights.profile(
         profile_json.read(),
         'application/json',
@@ -26,6 +26,7 @@ with open("output.json", "w") as file:
 
 listOfTraits = {}
 list_of_music_genre = {}
+
 
 def json_file_to_dict(input_file):
     with open(input_file, "r") as inputFile:
