@@ -1,5 +1,5 @@
 from get_personality import *
-
+from recommender import run_model
 
 text = input("How do you feel today? (100 words or more): ")
 
@@ -12,8 +12,12 @@ text = input("How do you feel today? (100 words or more): ")
 
 
 personality = get_personality(text)
+
 if not personality:
     #TODO: Use default text
     pass
 
-personality = process_personality(personality.result))
+personality = process_personality(personality.result)
+
+predicted_categories = run_model(personality)
+print(predicted_categories)

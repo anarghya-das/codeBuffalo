@@ -28,6 +28,7 @@ def get_personality(text):
     return profile
 
 def process_personality(data):
+    
     listOfTraits = {}
     for i in data['personality']:
         listOfTraits[i['trait_id']] = i['percentile']
