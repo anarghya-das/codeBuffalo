@@ -85,23 +85,23 @@ WSGI_APPLICATION = 'django_graphql_movies.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'HOST': '127.0.0.1',
-#         'PORT': '3306',
-#         'NAME': 'userData',
-#         'USER': 'anarghya'
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '/cloudsql/codebuffalohack:us-central1:graph-table',
-        'USER': 'anarghya',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
         'NAME': 'userData',
+        'USER': 'anarghya'
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'HOST': '/cloudsql/codebuffalohack:us-central1:graph-table',
+#         'USER': 'anarghya',
+#         'NAME': 'userData',
+#     }
+# }
 
 
 # Password validation

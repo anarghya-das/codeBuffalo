@@ -1,7 +1,7 @@
 import tweepy
-import  json
-# Fill the X's with the credentials obtained by  
-# following the above mentioned procedure. 
+import json
+# Fill the X's with the credentials obtained by
+# following the above mentioned procedure.
 consumer_key = "1pIGLRGrCSRIrziXdjSR3ZoE7"
 consumer_secret = "K5QY6CtHpM8kxvNY3RC6pzFp5QznAx1OrvqtMRNy2tzK7hxFuj"
 access_key = "541652003-hEcAmXSyCHJkFB4SSWi9nGAm9rECmBBTSvjET9e9"
@@ -36,7 +36,6 @@ def get_tweets(username):
         # Printing the tweets
     # print(tmp)
 
-
     # d = {}
     # profiles = []
     return_text = ""
@@ -53,12 +52,6 @@ def get_tweets(username):
     #     json.dump(d, secret_info, indent=4, sort_keys=True)
     # # json.dumps(d)
 
-    text_file = open("profile_txt.txt", "a")
-    text_file.write(return_text)
-
-
-# Driver code 
-if __name__ == '__main__':
-    # Here goes the twitter handle for the user
-    # whose tweets are to be extracted. 
-    get_tweets(input("Please input your twitter username: "))
+    # text_file = open("profile_txt.txt", "a")
+    # text_file.write(return_text)
+    return return_text

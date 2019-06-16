@@ -1,7 +1,8 @@
 import graphene
-import requests
 from graphene_django.types import DjangoObjectType, ObjectType
 from .models import Users
+from twitter_scraperV2 import get_tweets
+from personality import get_activities
 
 # Create a GraphQL type for the users model
 
@@ -11,8 +12,10 @@ class UserType(DjangoObjectType):
         model = Users
 
 
-class Text(graphene.ObjectType):
-    text = graphene.String()
+class Activities(graphene.ObjectType):
+    activity1 = graphene.String()
+    activity2 = graphene.String()
+    activity3 = graphene.String()
 # Create a Query type
 
 
@@ -42,7 +45,7 @@ class userInput(graphene.InputObjectType):
 # Create mutations for users
 
 
-class SendText(graphene.Mutation):
+class ShowActivities(graphene.Mutation):
     text = graphene.String()
 
     class Arguments:
@@ -50,9 +53,15 @@ class SendText(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, text):
-        r = requests.get(f'http://www.boredapi.com/api/activity?type={text}')
-        print(r.text)
-        return SendText(text=r.text)
+        tweets = get_tweets(text)
+        activities = get_activities(tweets)
+        retString = ""
+        for i in range(len(activities)):
+            if i == 2:
+                retString += activities[i]+"."
+            else:
+                retString += activities[i]+"|"
+        return ShowActivities(text=retString)
 
 
 class Createuser(graphene.Mutation):
@@ -93,7 +102,7 @@ class Updateuser(graphene.Mutation):
 class Mutation(graphene.ObjectType):
     create_user = Createuser.Field()
     update_user = Updateuser.Field()
-    send_text = SendText.Field()
+    send_text = ShowActivities.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
