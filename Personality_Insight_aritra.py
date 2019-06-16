@@ -1,6 +1,7 @@
 from ibm_watson import PersonalityInsightsV3
 from os.path import join, dirname
 import json
+import csv
 
 personality_insights = PersonalityInsightsV3(
     version='2017-10-13',
@@ -56,7 +57,9 @@ def music_genre_score(input_file):
 
 music_genre_score("output.json")
 
+with open('people1.csv', 'a') as csvFile:
+    writer = csv.writer(csvFile)
+    writer.writerow(list_of_music_genre)
+
+csvFile.close()
 print(list_of_music_genre)
-
-
-
