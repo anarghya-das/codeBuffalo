@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'The Unbored!',
         theme: ThemeData(
             // This is the theme of your application.
             //
@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
     EdgeInsets devicePadding = MediaQuery.of(context).padding;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Graph Client"),
+        title: Text("The Unbored!"),
         elevation: 0,
         centerTitle: true,
         backgroundColor: Color.fromRGBO(93, 142, 155, 1.0),

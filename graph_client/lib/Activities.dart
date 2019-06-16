@@ -3,7 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart';
 
-final String API_URL = "http://10.0.2.2:8000/graphql/";
+final String API_URL = "https://codebuffalohack.appspot.com/graphql/";
 
 class Activities extends StatefulWidget {
   final String _name;
@@ -65,20 +65,7 @@ class _ActivitiesState extends State<Activities> {
                   case ConnectionState.done:
                     if (snapshot.hasError) {
                       print(snapshot.error);
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(
-                              child: Text(
-                                "An error Occured!",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                            ),
-                          )
-                        ],
-                      );
+                      return Error();
                     } else {
                       return createActivityList(context, snapshot);
                     }
@@ -88,6 +75,38 @@ class _ActivitiesState extends State<Activities> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget ErrorDebug() {
+    List<String> activities = ["snapshot.data", "dance", "cruuyyy"];
+    return ListView.separated(
+        itemCount: activities.length,
+        separatorBuilder: (context, i) => Divider(
+              height: 1,
+              color: Colors.black26,
+            ),
+        itemBuilder: (context, i) {
+          return ListTile(
+            title: Text(activities[i]),
+          );
+        });
+  }
+
+  Widget Error() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Text(
+              "An error Occured!",
+              style: TextStyle(fontSize: 30),
+            ),
+          ),
+        )
+      ],
     );
   }
 

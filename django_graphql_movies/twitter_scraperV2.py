@@ -2,10 +2,10 @@ import tweepy
 import json
 # Fill the X's with the credentials obtained by
 # following the above mentioned procedure.
-consumer_key = "1pIGLRGrCSRIrziXdjSR3ZoE7"
-consumer_secret = "K5QY6CtHpM8kxvNY3RC6pzFp5QznAx1OrvqtMRNy2tzK7hxFuj"
-access_key = "541652003-hEcAmXSyCHJkFB4SSWi9nGAm9rECmBBTSvjET9e9"
-access_secret = "6j2FVljFLAmENr2tfuDfkTHZIZBE2mFgyc9TnrvdhAWin"
+consumer_key = "TSHKhUaNBtYyCAz6fVIFWqt7t"
+consumer_secret = "NVpGIVRaSA60uiEWwmWBNw8wozwD3b4f6ICgSP3ohMFOQ0xFeJ"
+access_key = "541652003-V0lzzHhzDd55ZL26KWWvZ2Aodu4lhU0MffEbfeiz"
+access_secret = "A0l0chyzncoXPnOehK6ujxUl2S2Hib2CfkHueSbSJ4Ho3"
 
 tmp = []
 
