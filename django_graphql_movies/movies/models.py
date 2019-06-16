@@ -60,6 +60,15 @@ class Users(models.Model):
     value_hedonism = models.FloatField()
     value_self_enhancement = models.FloatField()
     value_self_transcendence = models.FloatField()
+    charity = models.FloatField()
+    education = models.FloatField()
+    diy = models.FloatField()
+    music = models.FloatField()
+    social = models.FloatField()
+    recreation = models.FloatField()
+    relaxation = models.FloatField()
+    cooking = models.FloatField()
+    busywork = models.FloatField()
 
     class Meta:
         ordering = ()

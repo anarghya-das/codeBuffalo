@@ -10,3 +10,6 @@ Rx==1.6.1
 singledispatch==3.4.0.3
 six==1.12.0
 sqlparse==0.3.0
+PyMySQL==0.9.3
+mysqlclient==1.4.2.post1
+requests==2.22.0
