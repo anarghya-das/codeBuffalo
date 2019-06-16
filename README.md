@@ -6,6 +6,8 @@ Recommend activities from the Bored API based off of your personality (it is unn
 
 Refer to slide #2 at https://docs.google.com/presentation/d/1TMRQL_XMkMwzgac2ks5apyzubUlu669p8rYNSpAYrR0/edit?usp=sharing. for details (and a laugh or two).
 
+Video: https://drive.google.com/open?id=1V8nKAon5SnZXoeyJhvEdszxWWVEQKv3d
+
 We are providing the application as both an APK to be downloaded on to your Android phone and as a service accessed through GraphiQL. The APK will most likely be ready after the deadline. 
 
 ### GraphiQL:
