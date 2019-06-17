@@ -8,8 +8,6 @@ import random
 
 from moodtape_functions import authenticate_spotify, aggregate_top_artists, aggregate_top_tracks, select_tracks, create_playlist
 
-client_id = "9a6e7be5e69a43f4bfbf7834ca8dd6c1"
-client_secret = "fd867b2e103d4f90bb456b57107f75e9"
 redirect_uri = "https://www.youtube.com/"
 
 scope = 'user-library-read user-top-read playlist-modify-public user-follow-read'
