@@ -1,6 +1,6 @@
 numpy==1.16.4
 aniso8601==6.0.0
-Django==2.2.2
+Django==2.2.24
 graphene==2.1.6
 graphene-django==2.3.0
 graphql-core==2.2
