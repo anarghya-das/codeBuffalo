@@ -1,4 +1,4 @@
-numpy==1.16.4
+numpy==1.22.0
 aniso8601==6.0.0
 Django==2.2.2
 graphene==2.1.6
